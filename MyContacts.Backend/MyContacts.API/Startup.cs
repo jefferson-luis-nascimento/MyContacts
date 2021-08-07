@@ -41,6 +41,8 @@ namespace MyContacts.API
 
             });
 
+            DependencyInjection.Register(services);
+
             services.AddControllers();
         }
 

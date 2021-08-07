@@ -1,0 +1,18 @@
+﻿using MyContacts.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MyContacts.Interface.Repositories
+{
+    public interface IBaseRepository<TEntity> where TEntity : BaseEntity
+    {
+        Task<TEntity> GetById(Guid id);
+        Task<IEnumerable<TEntity>> GetAll();
+        Task<TEntity> Create(TEntity entity);
+        Task<TEntity> Update(TEntity entity);
+        Task Delete(Guid id);        
+    }
+}
