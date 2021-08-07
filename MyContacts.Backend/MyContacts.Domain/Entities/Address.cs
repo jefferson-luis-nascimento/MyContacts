@@ -1,6 +1,6 @@
-﻿namespace MyContacts.Domain.VOs
+﻿namespace MyContacts.Domain.Entities
 {
-    public class Address
+    public class Address : BaseEntity
     {
         public string ZipCode { get; set; }
         public string Country { get; set; }

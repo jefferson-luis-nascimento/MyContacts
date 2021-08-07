@@ -1,11 +1,11 @@
 ﻿namespace MyContacts.Domain.VOs
 {
-    public class Cpf : Document
+    public class Cnpj : Document
     {
-        public Cpf(string number)
+        public Cnpj(string number) 
             : base(number)
         {
-
+            
         }
     }
 }
