@@ -25,14 +25,15 @@ namespace MyContacts.Repository.Maps
 
         public virtual void Configure(EntityTypeBuilder<TEntity> builder)
         {
-            if(!string.IsNullOrWhiteSpace(_tableName))
-            {
-                builder.ToTable(_tableName);
-            }
+            //if(!string.IsNullOrWhiteSpace(_tableName))
+            //{
+            //    builder.ToTable(_tableName);
+            //}
 
-            builder.HasKey(entity => entity.Id);
-            builder.Property(entity => entity.Id).HasColumnName("id");
-            builder.Property(entity => entity.CreatedIn).HasColumnName("created_in").IsRequired();
+            //builder.Property(entity => entity.Id).HasColumnName("id");
+            //builder.Property(entity => entity.CreatedIn).HasColumnName("created_in").IsRequired();
+
+            //builder.HasKey(entity => entity.Id).IsClustered();
         }
     }
 }

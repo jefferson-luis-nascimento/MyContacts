@@ -1,22 +1,30 @@
 ﻿using MyContacts.Domain.Enums;
 using MyContacts.Domain.VOs;
+using System;
 
 namespace MyContacts.Domain.Entities
 {
-    public class NaturalPerson : Person
+    public class NaturalPerson : BaseEntity
     {
-        public Name Name { get; private set; }
-        public Cpf CPF { get; private set; }
-        public Birthday Birthday { get; private set; }
-        public Gender Gender { get; private set; }
+        public string Name { get; set; }
+        public string CPF { get; set; }
+        public DateTime Birthday { get; set; }
+        public Gender Gender { get; set; }
+        public Guid AddressId { get; set; }
+        public virtual Address Address { get; set; }
 
-        public NaturalPerson(Name name, Cpf cpf, Birthday birthday, Gender gender, Address address)
-            : base(address)
+        public NaturalPerson()
+        {
+
+        }
+
+        public NaturalPerson(string name, string cpf, DateTime birthday, Gender gender, Address address)
         {
             Name = name;
             CPF = cpf;
             Birthday = birthday;
             Gender = gender;
+            Address = address;
         }
     }
 }
