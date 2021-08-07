@@ -1,10 +1,7 @@
 ﻿using MyContacts.Domain.Entities;
 using MyContacts.Interface.Repositories;
-using MyContacts.Service.Interfaces;
-using System;
+using MyContacts.Interface.Services;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MyContacts.Service.Implementations
