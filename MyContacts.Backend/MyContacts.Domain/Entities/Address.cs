@@ -1,4 +1,6 @@
-﻿namespace MyContacts.Domain.Entities
+﻿using System.Collections.Generic;
+
+namespace MyContacts.Domain.Entities
 {
     public class Address : BaseEntity
     {
@@ -8,5 +10,6 @@
         public string City { get; set; }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
+        public List<Person> Persons { get; set; }
     }
 }
