@@ -14,7 +14,7 @@ namespace MyContacts.API
     {
         public IConfiguration Configuration { get; }
 
-        public DbConnection DbConnection => new SqlConnection(Configuration.GetConnectionString("SqlServer"));
+        //public DbConnection DbConnection => new SqlConnection(Configuration.GetConnectionString("SqlServer"));
 
         public Startup(IConfiguration configuration)
         {
@@ -26,15 +26,13 @@ namespace MyContacts.API
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(
-                    DbConnection,
-                    assembly => assembly.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName));
+                options.UseSqlServer(Configuration.GetConnectionString("SqlServer"));
 
             });
 
-            DependencyInjection.Register(services);
-
             services.AddControllers();
+
+            DependencyInjection.Register(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

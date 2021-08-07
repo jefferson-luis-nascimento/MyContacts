@@ -1,23 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MyContacts.Interface.Services;
+using System;
+using System.Threading.Tasks;
 
 namespace MyContacts.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ContactController : ControllerBase
+    public class ContactController : Controller
     {
-        private readonly ILogger<ContactController> _logger;
+        private readonly INaturalPersonGetAllService _naturalPersonGetAllService;
 
-        public ContactController(ILogger<ContactController> logger)
+        public ContactController(INaturalPersonGetAllService naturalPersonGetAllService)
         {
-            _logger = logger;
+            _naturalPersonGetAllService = naturalPersonGetAllService;
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            return Ok(new { message = "API online" });
+            return Ok(await _naturalPersonGetAllService.GetAll());
         }
     }
 }
