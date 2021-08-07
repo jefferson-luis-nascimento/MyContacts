@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using MyContacts.Domain.Entities;
 using MyContacts.Interface.Repositories;
 using MyContacts.Interface.Services;
 using MyContacts.Repository.Repositories;
@@ -15,8 +16,9 @@ namespace MyContacts.API
 
         private static void DependenciesRepository(IServiceCollection services)
         {
-            services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-            services.AddScoped<INaturalPersonGetAllService, NaturalPersonGetAllService>();
+            //services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddScoped<INaturalPersonRepository, NaturalPersonRepository>();
+            services.AddScoped<INaturalPersonService, NaturalPersonService>();
         }
     }
 }

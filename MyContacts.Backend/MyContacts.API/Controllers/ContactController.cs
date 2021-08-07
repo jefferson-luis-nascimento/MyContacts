@@ -10,9 +10,9 @@ namespace MyContacts.API.Controllers
     [Route("[controller]")]
     public class ContactController : Controller
     {
-        private readonly INaturalPersonGetAllService _naturalPersonGetAllService;
+        private readonly INaturalPersonService _naturalPersonGetAllService;
 
-        public ContactController(INaturalPersonGetAllService naturalPersonGetAllService)
+        public ContactController(INaturalPersonService naturalPersonGetAllService)
         {
             _naturalPersonGetAllService = naturalPersonGetAllService;
         }

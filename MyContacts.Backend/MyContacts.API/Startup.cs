@@ -14,8 +14,6 @@ namespace MyContacts.API
     {
         public IConfiguration Configuration { get; }
 
-        //public DbConnection DbConnection => new SqlConnection(Configuration.GetConnectionString("SqlServer"));
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;

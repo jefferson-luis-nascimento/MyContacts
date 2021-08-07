@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace MyContacts.Interface.Services
 {
-    public interface INaturalPersonGetAllService
+    public interface INaturalPersonService
     {
         Task<IEnumerable<NaturalPerson>> GetAll();
     }

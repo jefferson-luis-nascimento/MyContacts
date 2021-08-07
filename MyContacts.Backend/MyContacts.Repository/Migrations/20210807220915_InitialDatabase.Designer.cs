@@ -10,8 +10,8 @@ using MyContacts.Repository.Common;
 namespace MyContacts.Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210807185857_Init")]
-    partial class Init
+    [Migration("20210807220915_InitialDatabase")]
+    partial class InitialDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

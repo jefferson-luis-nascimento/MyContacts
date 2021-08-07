@@ -25,4 +25,8 @@
     <ProjectReference Include="..\MyContacts.Interface\MyContacts.Interface.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

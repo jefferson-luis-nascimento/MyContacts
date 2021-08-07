@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MyContacts.Interface.Repositories
 {
-    public interface INaturalPersonRepository: IBaseRepository<NaturalPerson>
+    public interface INaturalPersonRepository : IBaseRepository<NaturalPerson>
     {
         
     }

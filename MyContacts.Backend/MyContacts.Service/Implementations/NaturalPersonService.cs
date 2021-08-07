@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace MyContacts.Service.Implementations
 {
-    public class NaturalPersonGetAllService : INaturalPersonGetAllService
+    public class NaturalPersonService : INaturalPersonService
     {
         private INaturalPersonRepository _repository;
 
-        public NaturalPersonGetAllService(INaturalPersonRepository repository)
+        public NaturalPersonService(INaturalPersonRepository repository)
         {
             _repository = repository;
         }
