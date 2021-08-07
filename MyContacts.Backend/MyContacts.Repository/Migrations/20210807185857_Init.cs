@@ -27,46 +27,27 @@ namespace MyContacts.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "LegalPersons",
+                name: "Person",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TradeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Cnpj = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreatedIn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedIn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LegalPersons", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_LegalPersons_Addresses_AddressId",
-                        column: x => x.AddressId,
-                        principalTable: "Addresses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "NaturalPersons",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CPF = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Gender = table.Column<byte>(type: "tinyint", nullable: false),
-                    AddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Gender = table.Column<byte>(type: "tinyint", nullable: true),
                     CreatedIn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedIn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_NaturalPersons", x => x.Id);
+                    table.PrimaryKey("PK_Person", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_NaturalPersons_Addresses_AddressId",
+                        name: "FK_Person_Addresses_AddressId",
                         column: x => x.AddressId,
                         principalTable: "Addresses",
                         principalColumn: "Id",
@@ -74,23 +55,15 @@ namespace MyContacts.Repository.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_LegalPersons_AddressId",
-                table: "LegalPersons",
-                column: "AddressId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_NaturalPersons_AddressId",
-                table: "NaturalPersons",
+                name: "IX_Person_AddressId",
+                table: "Person",
                 column: "AddressId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "LegalPersons");
-
-            migrationBuilder.DropTable(
-                name: "NaturalPersons");
+                name: "Person");
 
             migrationBuilder.DropTable(
                 name: "Addresses");

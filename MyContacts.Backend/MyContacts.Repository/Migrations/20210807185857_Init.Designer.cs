@@ -10,7 +10,7 @@ using MyContacts.Repository.Common;
 namespace MyContacts.Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210807185319_Init")]
+    [Migration("20210807185857_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,7 +56,7 @@ namespace MyContacts.Repository.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("MyContacts.Domain.Entities.LegalPerson", b =>
+            modelBuilder.Entity("MyContacts.Domain.Entities.Person", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -64,6 +64,29 @@ namespace MyContacts.Repository.Migrations
 
                     b.Property<Guid>("AddressId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedIn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedIn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
+
+                    b.ToTable("Person");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Person");
+                });
+
+            modelBuilder.Entity("MyContacts.Domain.Entities.LegalPerson", b =>
+                {
+                    b.HasBaseType("MyContacts.Domain.Entities.Person");
 
                     b.Property<string>("Cnpj")
                         .HasColumnType("nvarchar(max)");
@@ -71,30 +94,15 @@ namespace MyContacts.Repository.Migrations
                     b.Property<string>("CompanyName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedIn")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("TradeName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("UpdatedIn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
-
-                    b.ToTable("LegalPersons");
+                    b.HasDiscriminator().HasValue("LegalPerson");
                 });
 
             modelBuilder.Entity("MyContacts.Domain.Entities.NaturalPerson", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AddressId")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MyContacts.Domain.Entities.Person");
 
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime2");
@@ -102,40 +110,19 @@ namespace MyContacts.Repository.Migrations
                     b.Property<string>("CPF")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedIn")
-                        .HasColumnType("datetime2");
-
                     b.Property<byte>("Gender")
                         .HasColumnType("tinyint");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("UpdatedIn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
-
-                    b.ToTable("NaturalPersons");
+                    b.HasDiscriminator().HasValue("NaturalPerson");
                 });
 
-            modelBuilder.Entity("MyContacts.Domain.Entities.LegalPerson", b =>
+            modelBuilder.Entity("MyContacts.Domain.Entities.Person", b =>
                 {
                     b.HasOne("MyContacts.Domain.Entities.Address", "Address")
-                        .WithMany("LegalPersons")
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Address");
-                });
-
-            modelBuilder.Entity("MyContacts.Domain.Entities.NaturalPerson", b =>
-                {
-                    b.HasOne("MyContacts.Domain.Entities.Address", "Address")
-                        .WithMany("NaturalPersons")
+                        .WithMany("Persons")
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -145,9 +132,7 @@ namespace MyContacts.Repository.Migrations
 
             modelBuilder.Entity("MyContacts.Domain.Entities.Address", b =>
                 {
-                    b.Navigation("LegalPersons");
-
-                    b.Navigation("NaturalPersons");
+                    b.Navigation("Persons");
                 });
 #pragma warning restore 612, 618
         }
