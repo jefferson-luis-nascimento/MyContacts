@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MyContacts.Interface.Repositories
 {
-    public interface IBaseRepository<TEntity> where TEntity : BaseEntity
+    public interface IRepository<TEntity> where TEntity : BaseEntity
     {
         Task<TEntity> GetById(Guid id);
         Task<IEnumerable<TEntity>> GetAll();

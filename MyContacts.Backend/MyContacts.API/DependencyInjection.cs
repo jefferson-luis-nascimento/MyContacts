@@ -16,8 +16,7 @@ namespace MyContacts.API
 
         private static void DependenciesRepository(IServiceCollection services)
         {
-            //services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-            services.AddScoped<INaturalPersonRepository, NaturalPersonRepository>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<INaturalPersonService, NaturalPersonService>();
         }
     }
