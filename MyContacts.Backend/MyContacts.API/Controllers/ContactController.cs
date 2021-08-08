@@ -12,8 +12,6 @@ namespace MyContacts.API.Controllers
     [Route("[controller]")]
     public class ContactController : Controller
     {
-        //private readonly INaturalPersonService _naturalPersonGetAllService;
-
         private readonly IRepository<NaturalPerson> _naturalPersonGetAllService;
 
         public ContactController(IRepository<NaturalPerson> naturalPersonGetAllService)
